@@ -55,6 +55,8 @@
 
       <div v-if="selectedContact" class="bg-customGreen h-[80px] flex items-center justify-between rounded-t-xl p-4">
         <div class="flex items-center">
+          <img v-if="isMobile" class="w-[20px] h-[20px] cursor-pointer ml-2" src="../assets/right-arrow.png" alt="c"
+            @click="showContactList = true" />
           <img :src="selectedContact.icon" alt="profil" class="w-[50px] h-[50px] rounded-full">
           <div class="text-direction margin-start text-white ">
             <p class="font-semibold text-[18px]">{{ selectedContact.name }}</p>
@@ -73,8 +75,6 @@
           </div>
         </div>
         <div class="flex items-center">
-          <img v-if="isMobile" class="w-[27px] h-[27px] cursor-pointer mr-2" src="../assets/contact.png" alt="c"
-            @click="showContactList = true" />
           <img class="w-[27px] h-[27px] cursor-pointer rtl-flip" src="../assets/list.png" alt="list"
             @click="toggleList" />
         </div>
@@ -126,14 +126,14 @@
           <div v-if="selectedItem" class="flex items-center w-full">
            
               <img src="../assets/attach-file.png" class="w-8 h-8 " alt="upload" @click="triggerFileUpload">
-            
+              <img src="../assets/happiness.png" class="w-6 h-6 " alt="emojis" @click="toggleEmojiPicker">
             <input type="file" ref="fileInput" class="hidden" accept="image/*" @change="handleFileUpload">
             <input type="text" v-model="message" placeholder="اكتب الرسالة"
               class="flex-grow h-10 bg-transparent focus:outline-none px-2 sm:px-4 text-direction placeholder-gray-400 text-gray-400 sm:w-[700px] md:w-[750px] lg:w-[800px] xl:w-[800px]" />
             
-              <img class="w-6 h-6 rtl-flip" src="../assets/chat.png" alt="send">
+              <img class="w-6 h-6 rtl-flip sm:-mr-2" src="../assets/chat.png" alt="send">
             
-              <img src="../assets/happiness.png" class="w-6 h-6 " alt="emojis" @click="toggleEmojiPicker">
+              
             <div v-if="showEmojiPicker"
               class="emoji-picker w-[350px] h-[300px] overflow-y-auto absolute bg-white border rounded -mt-[350px] "
               style="left:50px;">
