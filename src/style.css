@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer utilities {
+    .scrollbar-thin {
+      scrollbar-width: thin;
+    }
+    
+    .scrollbar-thin::-webkit-scrollbar {
+      width: 5px;
+    }
+    
+    .scrollbar-thin::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+    
+    .scrollbar-thin::-webkit-scrollbar-thumb {
+      background-color: #888;
+      border-radius: 20px;
+    }
+    .avatar-shadow {
+      box-shadow: 0 0 0 2px #f3f4f6;
+    }
+  
+  }
