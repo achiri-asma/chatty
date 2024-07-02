@@ -1,7 +1,8 @@
 <template>
-  <div class="flex flex-col lg:flex-row w-full max-w-[1400px] mx-auto px-4 py-4 rtl">
+  <div
+    class="flex flex-col lg:flex-row w-full max-w-[1400px] mx-auto px-4 py-4 rtl h-screen  lg:mt-[0px] -mt-4 overflow-hidden ">
     <!-- Contacts List -->
-    <div class="w-full lg:w-[400px] mb-8 mt-6 lg:margin-end lg:mb-0" v-show="showContactList || !isMobile">
+    <div class="w-full lg:w-[400px] mb-8 mt-6 lg:margin-end lg:ml-4 lg:mb-0" v-show="showContactList || !isMobile">
       <div class="bg-customGreen h-[80px] flex items-center rounded-t-xl p-4">
         <div class="flex items-center w-full bg-bg rounded-md h-[40px] px-3">
           <img class="w-5 h-5 rtl-flip" src="../assets/search.png" alt="search" />
@@ -41,18 +42,17 @@
             </li>
           </ul>
         </div>
-        <div class="bottom-0 left-0 w-full rounded-b-lg bg-customGreen border-t-2 bg-white text-gray-400 p-4 h-[50px] flex items-center mt-2">
+        <div
+          class="bottom-0 left-0 w-full rounded-b-lg bg-customGreen border-t-2 bg-white text-gray-400 p-4 h-[50px] flex items-center mt-2">
           <img src="../assets/archive.png" alt="archive" class="w-6 h-6 ">
           <p class="mr-5">المحادثات المؤرشفة</p>
         </div>
       </div>
     </div>
     <!-- Chat Section -->
-    <div class="w-full lg:w-[1000px] mt-6 lg:margin-start" v-show="(!showContactList && isMobile) || !isMobile">
+    <div class="w-full lg:w-[1000px] mt-6 lg:margin-start lg:mr-4" v-show="(!showContactList && isMobile) || !isMobile">
       <!-- Back button for mobile -->
-      <button v-if="isMobile" @click="backToContacts" class="mb-4 text-customGreen">
-        &lt; الرجوع إلى جهات الاتصال
-      </button>
+
       <div v-if="selectedContact" class="bg-customGreen h-[80px] flex items-center justify-between rounded-t-xl p-4">
         <div class="flex items-center">
           <img :src="selectedContact.icon" alt="profil" class="w-[50px] h-[50px] rounded-full">
@@ -60,35 +60,25 @@
             <p class="font-semibold text-[18px]">{{ selectedContact.name }}</p>
             <p class="text-sm text-[15px]" dir="ltr">+213111111111</p>
           </div>
-          <div class="flex flex-row-reverse -space-x-2 rtl:space-x-reverse rtl:-space-x-2 sm:-space-x-2 md:-space-x-2 lg:-space-x-2 xl:-space-x-2 2xl:-space-x-2 mr-4 sm:mr-6 md:mr-[200px] lg:mr-[300px] xl:mr-[400px] 2xl:mr-[500px]">
-            <div class="relative inline-block  bg-yellow-50 border-2 border-yellow-200 rounded-full overflow-hidden h-10 w-10 hover:z-10 hover:bg-yellow-500 ">
-              <div class="h-7 rounded-full   flex items-center justify-center">
-                <p class="text-[16px] text-yellow-400 hover:text-white" title="شركة وثقى للاستشارات القانونية">ش</p>
-              </div>
-            </div>
-            <div class="relative inline-block border-2 bg-yellow-50 border-yellow-200 rounded-full overflow-hidden h-10 w-10 hover:z-10 hover:bg-yellow-500">
-              <div class="h-7 rounded-full flex items-center justify-center">
-                <p class="text-[16px] text-yellow-400 hover:text-white" title="Lamine">L</p>
-              </div>
-            </div>
-            <div class="relative inline-block border-2 bg-yellow-50 border-yellow-200 rounded-full overflow-hidden h-10 w-10 hover:z-10  hover:bg-yellow-500">
-              <div class="h-7 rounded-full flex items-center justify-center">
-                <p class="text-[16px] text-yellow-400 hover:text-white" title="Khaled">K</p>
-              </div>
-            </div>
-            <div class="relative inline-block border-2 bg-yellow-50 border-yellow-200 rounded-full overflow-hidden h-10 w-10 hover:z-10  hover:bg-yellow-500">
-              <div class="h-7 rounded-full flex items-center justify-center">
-                <p class="text-[16px] text-yellow-400 hover:text-white" title="rahmani djamel 2">R</p>
-              </div>
-            </div>
-            <div class="relative inline-block border-2 bg-yellow-50 border-yellow-200 rounded-full overflow-hidden h-10 w-10 hover:z-10 hover:bg-yellow-500">
-              <div class="h-7 rounded-full flex items-center justify-center">
-                <p class="text-[16px] text-yellow-400 hover:text-white" title="شركة وثقى للاستشارات القانونية">ش</p>
+          <div
+            class="flex flex-row-reverse -space-x-1 rtl:space-x-reverse rtl:-space-x-1 sm:-space-x-2 md:-space-x-2 lg:-space-x-2 xl:-space-x-2 2xl:-space-x-2 mr-2 sm:mr-4 md:mr-6 lg:mr-[200px] xl:mr-[300px] 2xl:mr-[400px]">
+            <div v-for="(participant, index) in participants" :key="index"
+              class="relative inline-block bg-yellow-50 border-2 border-yellow-200 rounded-full overflow-hidden h-8 w-8 sm:h-10 sm:w-10 hover:z-10 hover:bg-yellow-500">
+              <div class="h-full rounded-full flex items-center justify-center">
+                <p class="text-[14px] sm:text-[16px] text-yellow-400 hover:text-white" :title="participant.name">
+                  {{ participant.initial }}
+                </p>
               </div>
             </div>
           </div>
         </div>
-        <img class="w-[27px] h-[27px] cursor-pointer rtl-flip" src="../assets/list.png" alt="list" @click="toggleList">
+        <div class="flex items-center">
+          <img v-if="isMobile" class="w-[27px] h-[27px] cursor-pointer mr-2" src="../assets/contact.png" alt="c"
+            @click="showContactList = true" />
+          <img class="w-[27px] h-[27px] cursor-pointer rtl-flip" src="../assets/list.png" alt="list"
+            @click="toggleList" />
+        </div>
+
         <ul v-if="showList" class="absolute bg-white border rounded mt-[350px] p-2 w-[180px]" style="left: 12px;">
           <li v-for="(option, index) in options" :key="index" @click="selectOption(option)">
             <span class="flex items-center mb-4 hover:bg-green-100">
@@ -114,7 +104,8 @@
           </div>
         </div>
         <div class="bg-white h-[48px] rounded-b-xl flex items-center justify-between px-4">
-          <p dir="ltr" class="text-gray-400 text-right" v-if="isVisible">template مضى على اخر رسالة 24 ساعة يمكنك فقط ارسال</p>
+          <p dir="ltr" class="text-gray-400 text-right" v-if="isVisible">template مضى على اخر رسالة 24 ساعة يمكنك فقط
+            ارسال</p>
           <img class="w-[27px] h-[27px] cursor-pointer rtl-flip" src="../assets/select.png" alt="select"
             @click="toggleDropdown" v-if="isVisible" />
           <div v-if="showDropdown" class="absolute bg-white border rounded -mt-[350px] w-[350px] h-[320px] p-4 z-10"
@@ -133,18 +124,16 @@
             </div>
           </div>
           <div v-if="selectedItem" class="flex items-center w-full">
-            <button @click="triggerFileUpload">
-              <img src="../assets/attach-file.png" class="w-8 h-8 " alt="upload">
-            </button>
+           
+              <img src="../assets/attach-file.png" class="w-8 h-8 " alt="upload" @click="triggerFileUpload">
+            
             <input type="file" ref="fileInput" class="hidden" accept="image/*" @change="handleFileUpload">
             <input type="text" v-model="message" placeholder="اكتب الرسالة"
               class="flex-grow h-10 bg-transparent focus:outline-none px-2 sm:px-4 text-direction placeholder-gray-400 text-gray-400 sm:w-[700px] md:w-[750px] lg:w-[800px] xl:w-[800px]" />
-            <button class="ml-2 ">
-              <img class="w-6 h-6 rtl-flip" src="../assets/chat.png" alt="send">
-            </button>
-            <button class="ml-2 ">
-              <img src="../assets/happiness.png" class="w-6 h-6" alt="emojis" @click="toggleEmojiPicker">
-            </button>
+            
+              <img class="w-6 h-6 rtl-flip ml-2" src="../assets/chat.png" alt="send">
+            
+              <img src="../assets/happiness.png" class="w-6 h-6 ml-2" alt="emojis" @click="toggleEmojiPicker">
             <div v-if="showEmojiPicker"
               class="emoji-picker w-[350px] h-[300px] overflow-y-auto absolute bg-white border rounded -mt-[350px] "
               style="left:50px;">
@@ -194,7 +183,7 @@ export default {
       showContactList: true,
       selectedItem: null,
       contacts: [
-      { id: 1, name: 'أم عمر', time: '09:15 PM', lastMessage: 'السلام عليكم', icon: require('../assets/mom.png') },
+        { id: 1, name: 'أم عمر', time: '09:15 PM', lastMessage: 'السلام عليكم', icon: require('../assets/mom.png') },
         { id: 2, name: 'rahmani djamel 2', time: '09:18 PM', lastMessage: 'Salut', icon: require('../assets/new.png') },
         { id: 3, name: 'Abdullah Imane', time: '09:18 PM', lastMessage: 'Salut', icon: require('../assets/mom.png') },
         { id: 4, name: 'khaled', time: '09:18 PM', lastMessage: 'Salut', icon: require('../assets/new.png') },
@@ -211,6 +200,13 @@ export default {
         { name: 'اضافة tags', icon: require('../assets/tag.png') },
         { name: 'تغيير القسم', icon: require('../assets/three-books.png') },
         { name: 'انهاء المحادثة', icon: require('../assets/x-mark.png') }
+      ],
+      participants: [
+        { name: "شركة وثقى للاستشارات القانونية", initial: "ش" },
+        { name: "Lamine", initial: "L" },
+        { name: "Khaled", initial: "K" },
+        { name: "rahmani djamel 2", initial: "R" },
+        { name: "شركة وثقى للاستشارات القانونية", initial: "ش" },
       ],
       showDropdown: false,
       searchQuery1: '',
@@ -387,10 +383,22 @@ export default {
   background: #555;
 }
 
+
+
 @media (max-width: 1023px) {
+
   .contact-list,
   .chat-section {
     width: 100%;
+    height: 100vh;
+    overflow-y: auto;
+  }
+}
+
+
+@media (max-width: 640px) {
+  .mobile-height {
+    height: calc(100vh - 100px);
   }
 }
 </style>
