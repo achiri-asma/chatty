@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col lg:flex-row w-full max-w-[1400px] mx-auto px-4 py-4 rtl">
     <!-- Contacts List -->
-    <div class="w-full lg:w-[400px] mb-8 mt-6 margin-end lg:mb-0" v-show="showContactList || !isMobile">
+    <div class="w-full lg:w-[400px] mb-8 mt-6 lg:margin-end lg:mb-0" v-show="showContactList || !isMobile">
       <div class="bg-customGreen h-[80px] flex items-center rounded-t-xl p-4">
         <div class="flex items-center w-full bg-bg rounded-md h-[40px] px-3">
           <img class="w-5 h-5 rtl-flip" src="../assets/search.png" alt="search" />
@@ -41,14 +41,18 @@
             </li>
           </ul>
         </div>
-        <div class=" bottom-0 left-0 w-full  rounded-b-lg bg-customGreen border-t-2 bg-white text-gray-400 p-4 h-[50px] flex items-center mt-2">
+        <div class="bottom-0 left-0 w-full rounded-b-lg bg-customGreen border-t-2 bg-white text-gray-400 p-4 h-[50px] flex items-center mt-2">
           <img src="../assets/archive.png" alt="archive" class="w-6 h-6 ">
-          <p class=" mr-5"> المحادثات المؤرشفة</p>
-          </div>
+          <p class="mr-5">المحادثات المؤرشفة</p>
+        </div>
       </div>
     </div>
     <!-- Chat Section -->
-    <div class="w-full lg:w-[1000px] mt-6 margin-start" v-show="selectedContact || !isMobile">
+    <div class="w-full lg:w-[1000px] mt-6 lg:margin-start" v-show="(!showContactList && isMobile) || !isMobile">
+      <!-- Back button for mobile -->
+      <button v-if="isMobile" @click="backToContacts" class="mb-4 text-customGreen">
+        &lt; الرجوع إلى جهات الاتصال
+      </button>
       <div v-if="selectedContact" class="bg-customGreen h-[80px] flex items-center justify-between rounded-t-xl p-4">
         <div class="flex items-center">
           <img :src="selectedContact.icon" alt="profil" class="w-[50px] h-[50px] rounded-full">
@@ -56,43 +60,35 @@
             <p class="font-semibold text-[18px]">{{ selectedContact.name }}</p>
             <p class="text-sm text-[15px]" dir="ltr">+213111111111</p>
           </div>
-          <div
-            class="flex flex-row-reverse -space-x-2 rtl:space-x-reverse rtl:-space-x-2 sm:-space-x-2 md:-space-x-2 lg:-space-x-2 xl:-space-x-2 2xl:-space-x-2 mr-4 sm:mr-6 md:mr-[200px] lg:mr-[300px] xl:mr-[400px] 2xl:mr-[500px]">
-            <div
-              class="relative inline-block  bg-yellow-50 border-2 border-yellow-200 rounded-full overflow-hidden h-10 w-10 hover:z-10 hover:bg-yellow-500 ">
+          <div class="flex flex-row-reverse -space-x-2 rtl:space-x-reverse rtl:-space-x-2 sm:-space-x-2 md:-space-x-2 lg:-space-x-2 xl:-space-x-2 2xl:-space-x-2 mr-4 sm:mr-6 md:mr-[200px] lg:mr-[300px] xl:mr-[400px] 2xl:mr-[500px]">
+            <div class="relative inline-block  bg-yellow-50 border-2 border-yellow-200 rounded-full overflow-hidden h-10 w-10 hover:z-10 hover:bg-yellow-500 ">
               <div class="h-7 rounded-full   flex items-center justify-center">
                 <p class="text-[16px] text-yellow-400 hover:text-white" title="شركة وثقى للاستشارات القانونية">ش</p>
               </div>
             </div>
-            <div
-              class="relative inline-block border-2 bg-yellow-50 border-yellow-200 rounded-full overflow-hidden h-10 w-10 hover:z-10 hover:bg-yellow-500">
+            <div class="relative inline-block border-2 bg-yellow-50 border-yellow-200 rounded-full overflow-hidden h-10 w-10 hover:z-10 hover:bg-yellow-500">
               <div class="h-7 rounded-full flex items-center justify-center">
                 <p class="text-[16px] text-yellow-400 hover:text-white" title="Lamine">L</p>
               </div>
             </div>
-            <div
-              class="relative inline-block border-2 bg-yellow-50 border-yellow-200 rounded-full overflow-hidden h-10 w-10 hover:z-10  hover:bg-yellow-500">
+            <div class="relative inline-block border-2 bg-yellow-50 border-yellow-200 rounded-full overflow-hidden h-10 w-10 hover:z-10  hover:bg-yellow-500">
               <div class="h-7 rounded-full flex items-center justify-center">
                 <p class="text-[16px] text-yellow-400 hover:text-white" title="Khaled">K</p>
               </div>
             </div>
-            <div
-              class="relative inline-block border-2 bg-yellow-50 border-yellow-200 rounded-full overflow-hidden h-10 w-10 hover:z-10  hover:bg-yellow-500">
+            <div class="relative inline-block border-2 bg-yellow-50 border-yellow-200 rounded-full overflow-hidden h-10 w-10 hover:z-10  hover:bg-yellow-500">
               <div class="h-7 rounded-full flex items-center justify-center">
                 <p class="text-[16px] text-yellow-400 hover:text-white" title="rahmani djamel 2">R</p>
               </div>
             </div>
-            <div
-              class="relative inline-block border-2 bg-yellow-50 border-yellow-200 rounded-full overflow-hidden h-10 w-10 hover:z-10 hover:bg-yellow-500">
+            <div class="relative inline-block border-2 bg-yellow-50 border-yellow-200 rounded-full overflow-hidden h-10 w-10 hover:z-10 hover:bg-yellow-500">
               <div class="h-7 rounded-full flex items-center justify-center">
                 <p class="text-[16px] text-yellow-400 hover:text-white" title="شركة وثقى للاستشارات القانونية">ش</p>
               </div>
             </div>
           </div>
-
         </div>
         <img class="w-[27px] h-[27px] cursor-pointer rtl-flip" src="../assets/list.png" alt="list" @click="toggleList">
-
         <ul v-if="showList" class="absolute bg-white border rounded mt-[350px] p-2 w-[180px]" style="left: 12px;">
           <li v-for="(option, index) in options" :key="index" @click="selectOption(option)">
             <span class="flex items-center mb-4 hover:bg-green-100">
@@ -101,7 +97,6 @@
             </span>
           </li>
         </ul>
-
       </div>
 
       <div class="h-[600px] rounded-b-xl border-2 border-t-0 border-customGreen">
@@ -119,9 +114,7 @@
           </div>
         </div>
         <div class="bg-white h-[48px] rounded-b-xl flex items-center justify-between px-4">
-          <p dir="ltr" class="text-gray-400 text-right" v-if="isVisible">template مضى على اخر رسالة 24 ساعة يمكنك فقط
-            ارسال
-          </p>
+          <p dir="ltr" class="text-gray-400 text-right" v-if="isVisible">template مضى على اخر رسالة 24 ساعة يمكنك فقط ارسال</p>
           <img class="w-[27px] h-[27px] cursor-pointer rtl-flip" src="../assets/select.png" alt="select"
             @click="toggleDropdown" v-if="isVisible" />
           <div v-if="showDropdown" class="absolute bg-white border rounded -mt-[350px] w-[350px] h-[320px] p-4 z-10"
@@ -139,7 +132,7 @@
             <div v-if="filteredItems.length > 5" class="text-center text-gray-500 ">
             </div>
           </div>
-          <div v-if="selectedItem" class="flex items-center">
+          <div v-if="selectedItem" class="flex items-center w-full">
             <button @click="triggerFileUpload">
               <img src="../assets/attach-file.png" class="w-8 h-8 " alt="upload">
             </button>
@@ -176,7 +169,6 @@
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </div>
@@ -202,7 +194,7 @@ export default {
       showContactList: true,
       selectedItem: null,
       contacts: [
-        { id: 1, name: 'أم عمر', time: '09:15 PM', lastMessage: 'السلام عليكم', icon: require('../assets/mom.png') },
+      { id: 1, name: 'أم عمر', time: '09:15 PM', lastMessage: 'السلام عليكم', icon: require('../assets/mom.png') },
         { id: 2, name: 'rahmani djamel 2', time: '09:18 PM', lastMessage: 'Salut', icon: require('../assets/new.png') },
         { id: 3, name: 'Abdullah Imane', time: '09:18 PM', lastMessage: 'Salut', icon: require('../assets/mom.png') },
         { id: 4, name: 'khaled', time: '09:18 PM', lastMessage: 'Salut', icon: require('../assets/new.png') },
@@ -219,7 +211,6 @@ export default {
         { name: 'اضافة tags', icon: require('../assets/tag.png') },
         { name: 'تغيير القسم', icon: require('../assets/three-books.png') },
         { name: 'انهاء المحادثة', icon: require('../assets/x-mark.png') }
-
       ],
       showDropdown: false,
       searchQuery1: '',
@@ -252,18 +243,17 @@ export default {
     toggleEmojiPicker() {
       this.showEmojiPicker = !this.showEmojiPicker;
     },
-
+    addEmoji(emoji) {
+      this.message += emoji;
+    },
     selectItem(item) {
       this.selectedItem = item;
       this.hideDropdown();
       this.isVisible = !this.isVisible;
-
     },
     selectItem1(item) {
       this.selectedItem = item;
       this.hideDropdown();
-
-
     },
     toggleDropdown() {
       this.showDropdown = !this.showDropdown;
@@ -281,10 +271,8 @@ export default {
       }
     },
     backToContacts() {
-      if (this.isMobile) {
-        this.showContactList = true;
-        this.selectedContact = null;
-      }
+      this.showContactList = true;
+      this.selectedContact = null;
     },
     sendMessage() {
       if (this.message.trim() !== '') {
@@ -303,9 +291,12 @@ export default {
     },
     checkMobile() {
       this.isMobile = window.innerWidth < 1024;
+      if (!this.isMobile) {
+        this.showContactList = true;
+      }
     },
     selectDefaultContact() {
-      if (this.contacts.length > 0) {
+      if (this.contacts.length > 0 && !this.isMobile) {
         this.selectContact(this.contacts[0]);
       }
     },
@@ -316,23 +307,6 @@ export default {
       console.log('Option sélectionnée:', option);
       this.showList = false;
     }
-  },
-  directives: {
-    clickOutside: {
-      bind(el, binding, vnode) {
-        el.clickOutsideEvent = function (event) {
-          // Check if click was outside the element and its children
-          if (!(el == event.target || el.contains(event.target))) {
-            // Call method provided in attribute value
-            vnode.context[binding.expression](event);
-          }
-        };
-        document.body.addEventListener('click', el.clickOutsideEvent);
-      },
-      unbind(el) {
-        document.body.removeEventListener('click', el.clickOutsideEvent);
-      },
-    },
   },
   mounted() {
     this.checkMobile();
@@ -414,7 +388,6 @@ export default {
 }
 
 @media (max-width: 1023px) {
-
   .contact-list,
   .chat-section {
     width: 100%;
