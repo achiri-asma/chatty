@@ -131,9 +131,9 @@
             <input type="text" v-model="message" placeholder="اكتب الرسالة"
               class="flex-grow h-10 bg-transparent focus:outline-none px-2 sm:px-4 text-direction placeholder-gray-400 text-gray-400 sm:w-[700px] md:w-[750px] lg:w-[800px] xl:w-[800px]" />
             
-              <img class="w-6 h-6 rtl-flip ml-2" src="../assets/chat.png" alt="send">
+              <img class="w-6 h-6 rtl-flip" src="../assets/chat.png" alt="send">
             
-              <img src="../assets/happiness.png" class="w-6 h-6 ml-2" alt="emojis" @click="toggleEmojiPicker">
+              <img src="../assets/happiness.png" class="w-6 h-6 " alt="emojis" @click="toggleEmojiPicker">
             <div v-if="showEmojiPicker"
               class="emoji-picker w-[350px] h-[300px] overflow-y-auto absolute bg-white border rounded -mt-[350px] "
               style="left:50px;">
@@ -204,9 +204,7 @@ export default {
       participants: [
         { name: "شركة وثقى للاستشارات القانونية", initial: "ش" },
         { name: "Lamine", initial: "L" },
-        { name: "Khaled", initial: "K" },
-        { name: "rahmani djamel 2", initial: "R" },
-        { name: "شركة وثقى للاستشارات القانونية", initial: "ش" },
+
       ],
       showDropdown: false,
       searchQuery1: '',
