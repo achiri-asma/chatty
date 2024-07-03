@@ -124,30 +124,34 @@
             </div>
           </div>
           <div v-if="selectedItem" class="flex items-center w-full">
-           
-              <img src="../assets/attach-file.png" class="w-8 h-8 " alt="upload" @click="triggerFileUpload">
-              <img src="../assets/happiness.png" class="w-6 h-6 mr-2" alt="emojis" @click="toggleEmojiPicker">
+
+            <img src="../assets/attach-file.png" class="w-8 h-8 " alt="upload" @click="triggerFileUpload">
+            <img src="../assets/happiness.png" class="w-6 h-6 mr-2" alt="emojis" @click="toggleEmojiPicker">
             <input type="file" ref="fileInput" class="hidden" accept="image/*" @change="handleFileUpload">
             <input type="text" v-model="message" placeholder="اكتب الرسالة"
               class="flex-grow h-10 bg-transparent focus:outline-none px-2 sm:px-4 text-direction placeholder-gray-400 text-gray-400 sm:w-[700px] md:w-[750px] lg:w-[800px] xl:w-[800px]" />
-            
-              <img class="w-6 h-6 rtl-flip sm:-mr-5" src="../assets/chat.png" alt="send">
-            
-              
-              <div v-if="showEmojiPicker"
-     class="emoji-picker w-full sm:w-[300px] md:w-[350px] h-[300px] overflow-y-auto 
+
+            <div class="flex items-center space-x-2 sm:space-x-3">
+              <button class="flex-shrink-0">
+                <img class="w-6 h-6 rtl-flip" src="../assets/chat.png" alt="send">
+              </button>
+              <button class="flex-shrink-0" @click="toggleDropdown">
+                <img class="w-6 h-6 cursor-pointer rtl-flip" src="../assets/select.png" alt="select">
+              </button>
+            </div>
+            <div v-if="showEmojiPicker" class="emoji-picker w-full sm:w-[300px] md:w-[350px] h-[300px] overflow-y-auto 
             fixed sm:absolute bg-white border rounded 
             bottom-0 sm:bottom-auto left-0 sm:left-auto
             -mt-[300px] sm:-mt-[340px] md:right-[400px]
             z-50">
-            <div class="p-2 border-b flex justify-between items-center sm:hidden">
-    <span>Emojis</span>
-    <button @click="showEmojiPicker = false" class="text-xl">&times;</button>
-  </div>
-  <EmojiPicker @emoji-select="addEmoji" class="[&_img]:w-8 [&_img]:h-8 sm:[&_img]:w-10 sm:[&_img]:h-10 [&_span]:text-xs" />
-</div>
-            <img class="w-6 h-6 cursor-pointer rtl-flip" src="../assets/select.png" alt="select"
-              @click="toggleDropdown" />
+              <div class="p-2 border-b flex justify-between items-center sm:hidden">
+                <span>Emojis</span>
+                <button @click="showEmojiPicker = false" class="text-xl">&times;</button>
+              </div>
+              <EmojiPicker @emoji-select="addEmoji"
+                class="[&_img]:w-8 [&_img]:h-8 sm:[&_img]:w-10 sm:[&_img]:h-10 [&_span]:text-xs" />
+            </div>
+
             <div v-if="showDropdown" class="absolute bg-white border rounded -mt-[350px] w-[350px] h-[320px] p-4 z-10"
               style="left: 12px;">
               <input type="text" v-model="searchQuery1" placeholder="ابحث عن رد/قالب جاهز"
@@ -241,13 +245,13 @@ export default {
   },
   methods: {
     toggleEmojiPicker() {
-    this.showEmojiPicker = !this.showEmojiPicker;
-    if (this.showEmojiPicker && this.isMobile) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-  },
+      this.showEmojiPicker = !this.showEmojiPicker;
+      if (this.showEmojiPicker && this.isMobile) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = '';
+      }
+    },
     addEmoji(emoji) {
       this.message += emoji;
     },
