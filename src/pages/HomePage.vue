@@ -129,7 +129,7 @@
             <img src="../assets/happiness.png" class="w-6 h-6 mr-2" alt="emojis" @click="toggleEmojiPicker">
             <input type="file" ref="fileInput" class="hidden" accept="image/*" @change="handleFileUpload">
             <input type="text" v-model="message" placeholder="اكتب الرسالة"
-              class="flex-grow h-10 bg-transparent focus:outline-none px-2 sm:px-4 text-direction placeholder-gray-400 text-gray-400 sm:w-[700px] md:w-[750px] lg:w-[800px] xl:w-[800px]" />
+              class="flex-grow h-10 bg-transparent focus:outline-none px-2 sm:px-4 text-direction placeholder-gray-400 text-gray-400 sm:w-[400px] md:w-[750px] lg:w-[800px] xl:w-[800px]" />
 
             <div class="flex items-center ">
               <button class="flex-shrink-0  flex items-center justify-center">
