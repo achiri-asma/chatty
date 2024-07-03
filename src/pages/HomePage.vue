@@ -1,9 +1,8 @@
 <template>
   <div
-    class="flex flex-col lg:flex-row w-full max-w-[1400px] mx-auto px-4 py-4 rtl h-screen  lg:mt-[0px] -mt-4 overflow-hidden"
-    >
+    class="flex flex-col lg:flex-row w-full max-w-[1400px] mx-auto px-4 py-4 rtl h-screen  lg:mt-[0px] -mt-4 overflow-hidden">
     <!-- Contacts List -->
-    <div class="w-full lg:w-[400px] mb-8 mt-6  lg:margin-end lg:ml-4 lg:mb-0" v-show="showContactList || !isMobile">
+    <div class="w-full lg:w-[400px] mb-8 mt-6   lg:margin-end lg:ml-4 lg:mb-0" v-show="showContactList || !isMobile">
       <div class="bg-customGreen h-[80px] flex items-center rounded-t-xl p-4">
         <div class="flex items-center w-full bg-transparent rounded-md h-[40px] px-3 relative search-container">
           <img class="w-5 h-5 rtl-flip cursor-pointer search-icon" src="../assets/search.png" alt="search" />
@@ -13,7 +12,7 @@
         </div>
       </div>
 
-      <div class="h-[600px] rounded-b-xl border-2 border-t-0 border-customGreen">
+      <div class="h-[600px] rounded-b-xl border-2  bg-white border-t-0 border-customGreen">
         <div class="overflow-y-auto h-[540px] scrollbar-thin">
           <ul x-data="{ selectedId: null }">
             <li v-for="contact in filteredContacts" :key="contact.id"
@@ -83,7 +82,7 @@
             @click="toggleList" />
         </div>
 
-        <ul  v-click-outside="hideList" v-if="showList"
+        <ul v-click-outside="hideList" v-if="showList"
           class="absolute bg-white border rounded-xl mt-[230px] p-2 w-[200px] left-3 sm:left-4 md:left-6 lg:left-8 xl:left-12">
           <li v-for="(option, index) in options" :key="index" @click="selectOption(option)"
             class="rounded-xl h-[40px] mb-5 hover:bg-gray-200">
@@ -116,39 +115,35 @@
           </div>
         </div>
 
-        <div class="flex items-center gap-2 p-2">
-  <img src="../assets/happiness.png" class="w-6 h-6 mr-2" alt="emojis" @click="toggleEmojiPicker">
-  <input type="file" ref="fileInput" class="hidden" accept="image/*" @change="handleFileUpload">
-  
-  <div class="flex-grow w-full sm:w-[300px] md:w-[550px] lg:w-[650px] xl:w-[750px]">
-    <textarea 
-      v-model="message" 
-      placeholder="اكتب الرسالة"
-      class="w-full h-10 bg-transparent focus:outline-none px-2 sm:px-4 text-gray-400 border rounded-full resize-none overflow-hidden leading-10"
-      rows="1"
-      @input="adjustTextareaHeight"
-    ></textarea>
-  </div>
-  
-  <button class="flex-shrink-0 flex items-center justify-center w-10 h-10" >
-    <img src="../assets/attach-file.png" class="w-8 h-8" alt="upload" @click="triggerFileUpload">
+        <div class="flex items-center gap-2  bg-white rounded-b-xl  p-2">
+          <img src="../assets/happiness.png" class="w-6 h-6 mr-2" alt="emojis" @click="toggleEmojiPicker">
+          <input type="file" ref="fileInput" class="hidden" accept="image/*" @change="handleFileUpload">
 
-  </button>
-</div>
+          <div class="flex-grow w-full  sm:w-[300px] md:w-[550px] lg:w-[650px] xl:w-[750px]">
+            <textarea v-model="message" placeholder="اكتب الرسالة"
+              class="w-full h-10 bg-transparent focus:outline-none px-2 sm:px-4 text-gray-400 border rounded-full resize-none overflow-hidden leading-10"
+              rows="1" @input="adjustTextareaHeight"></textarea>
+          </div>
 
-<div v-if="showEmojiPicker" class="emoji-picker w-full sm:w-[300px] md:w-[350px] h-[300px] overflow-y-auto 
+          <button class="flex-shrink-0 flex items-center justify-center w-10 h-10">
+            <img src="../assets/attach-file.png" class="w-8 h-8" alt="upload" @click="triggerFileUpload">
+
+          </button>
+        </div>
+
+        <div v-if="showEmojiPicker" class="emoji-picker w-full sm:w-[300px] md:w-[350px] h-[300px] overflow-y-auto 
   fixed sm:absolute bg-white border rounded 
   bottom-0 sm:bottom-auto left-0 sm:left-auto
   -mt-[300px] sm:-mt-[340px] md:right-[400px] 
   -mt-[300px] sm:-mt-[340px] md:right-[400px] scrollbar-thin
   z-50">
-  <div class="p-2 border-b flex justify-between items-center sm:hidden">
-    <span>Emojis</span>
-    <button @click="showEmojiPicker = false" class="text-xl">&times;</button>
-  </div>
-  <EmojiPicker @emoji-select="addEmoji"
-    class="[&_img]:w-8 [&_img]:h-8 sm:[&_img]:w-10 sm:[&_img]:h-10 [&_span]:text-xs" />
-</div>
+          <div class="p-2 border-b flex justify-between items-center sm:hidden">
+            <span>Emojis</span>
+            <button @click="showEmojiPicker = false" class="text-xl">&times;</button>
+          </div>
+          <EmojiPicker @emoji-select="addEmoji"
+            class="[&_img]:w-8 [&_img]:h-8 sm:[&_img]:w-10 sm:[&_img]:h-10 [&_span]:text-xs" />
+        </div>
       </div>
     </div>
   </div>
