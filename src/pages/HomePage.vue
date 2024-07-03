@@ -115,7 +115,7 @@
           </div>
         </div>
 
-        <div class="flex items-center gap-2  bg-white rounded-b-xl  p-2">
+        <div class="flex items-center gap-2  bg-white rounded-b-xl h-[47px] sm:rounded-b-xl p-2">
           <img src="../assets/happiness.png" class="w-6 h-6 mr-2" alt="emojis" @click="toggleEmojiPicker">
           <input type="file" ref="fileInput" class="hidden" accept="image/*" @change="handleFileUpload">
 
