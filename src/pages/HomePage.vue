@@ -131,11 +131,11 @@
             <input type="text" v-model="message" placeholder="اكتب الرسالة"
               class="flex-grow h-10 bg-transparent focus:outline-none px-2 sm:px-4 text-direction placeholder-gray-400 text-gray-400 sm:w-[700px] md:w-[750px] lg:w-[800px] xl:w-[800px]" />
 
-            <div class="flex items-center space-x-2 sm:space-x-3">
-              <button class="flex-shrink-0">
+            <div class="flex items-center space-x-2">
+              <button class="flex-shrink-0 w-8 h-8 flex items-center justify-center">
                 <img class="w-6 h-6 rtl-flip" src="../assets/chat.png" alt="send">
               </button>
-              <button class="flex-shrink-0" @click="toggleDropdown">
+              <button class="flex-shrink-0 w-8 h-8 flex items-center justify-center" @click="toggleDropdown">
                 <img class="w-6 h-6 cursor-pointer rtl-flip" src="../assets/select.png" alt="select">
               </button>
             </div>
